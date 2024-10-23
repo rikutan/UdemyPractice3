@@ -69,6 +69,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // Room 依存関係
+    val room_version = "2.6.1"
+
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
+
 }
