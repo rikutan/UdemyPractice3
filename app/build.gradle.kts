@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -70,8 +71,10 @@ dependencies {
 
     // Room 依存関係
     val room_version = "2.6.1"
-
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
 
+    // Hilt 依存関係追加
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 }
