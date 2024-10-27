@@ -19,7 +19,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             UdemyPractice3Theme {
-
             }
         }
     }
@@ -29,6 +28,5 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     UdemyPractice3Theme {
-        
     }
 }
