@@ -77,6 +77,7 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
+    // ktx 依存関係追加
     implementation(libs.androidx.room.ktx)
 
 
