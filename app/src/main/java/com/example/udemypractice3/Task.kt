@@ -3,7 +3,9 @@ package com.example.udemypractice3
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity // 下記 data class がデータベースのテーブルを表す
+// 下記 data class がデータベースのテーブルを表す
+@Entity
+
 // データベースのテーブル定義
 data class Task(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
