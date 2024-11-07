@@ -26,13 +26,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.udemypractice3.MainViewModel
 import com.example.udemypractice3.ui.theme.BackgroundColor1
 import com.example.udemypractice3.ui.theme.TextBorderColor
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditDialog(isShowDialog: MutableState<Boolean>) {
+fun EditDialog(
+    isShowDialog: MutableState<Boolean>,
+    viewModel: MainViewModel = hiltViewModel()
+) {
     BasicAlertDialog(
 
         // ダイアログが閉じられるときの処理を指定
@@ -58,16 +63,19 @@ fun EditDialog(isShowDialog: MutableState<Boolean>) {
 
 
                     // テキストフィールドの関数
-                    CustomTextField(text = "メールアドレス",
-                        placeholder = "例）xxxxxx@exaple.com",
-                        value = "",
-                        onValueChange = {})
+                    CustomTextField(text = "タイトル",
+                        placeholder = "タイトル",
+                        value = viewModel.title,
+                        onValueChange = { viewModel.title = it }
+                    )
                     Spacer(modifier = Modifier.height(10.dp))
-                    CustomTextField(text = "メールアドレス",
-                        placeholder = "例）xxxxxx@exaple.com",
-                        value = "",
-                        onValueChange = {})
+                    CustomTextField(text = "詳細",
+                        placeholder = "詳細",
+                        value = viewModel.description,
+                        onValueChange = { viewModel.description = it }
+                    )
                     Spacer(modifier = Modifier.height(20.dp))
+
 
 
                     // ボタンの関数

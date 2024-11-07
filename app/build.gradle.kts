@@ -76,9 +76,9 @@ dependencies {
     // Hilt 依存関係追加
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // ktx 依存関係追加
     implementation(libs.androidx.room.ktx)
-
 
 }
