@@ -1,7 +1,6 @@
 package com.example.udemypractice3.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,13 +12,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,14 +29,11 @@ import com.example.udemypractice3.ui.theme.TextBorderColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditDialog(
-    isShowDialog: MutableState<Boolean>,
-    viewModel: MainViewModel = hiltViewModel()
-) {
+fun EditDialog(viewModel: MainViewModel = hiltViewModel()) {
     BasicAlertDialog(
 
         // ダイアログが閉じられるときの処理を指定
-        onDismissRequest = { isShowDialog.value = false },
+        onDismissRequest = { viewModel.isShowDialog = false },
 
         // ダイアログの動作を設定。今回は、外側クリックで閉じない
         //properties = DialogProperties(dismissOnClickOutside = false),
@@ -84,7 +76,7 @@ fun EditDialog(
                             .fillMaxWidth()
                     ) {
                         Button(onClick = {
-                            isShowDialog.value = false
+                            viewModel.isShowDialog = false
                             viewModel.title = ""
                             viewModel.description = ""
                         }) {
@@ -94,7 +86,7 @@ fun EditDialog(
 
                         Button(
                             onClick = {
-                                isShowDialog.value = false
+                                viewModel.isShowDialog  = false
                                 viewModel.createTask()
                             }, modifier = Modifier.width(200.dp)
                         ) {

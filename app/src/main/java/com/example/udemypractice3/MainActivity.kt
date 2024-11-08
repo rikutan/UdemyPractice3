@@ -12,10 +12,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.udemypractice3.components.EditDialog
 import com.example.udemypractice3.ui.theme.Purple40
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,16 +36,15 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainContent() {
-    val isShowDialog = remember { mutableStateOf(false) }
-    if (isShowDialog.value) {
-        EditDialog(isShowDialog)
+fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
+    if (viewModel.isShowDialog) {
+        EditDialog()
     }
 
     // アプリ画面の基本レイアウトを作成するための構造。
     // トップバーやボトムバー、メインコンテンツ、FABなどを簡単に配置できる。
     Scaffold(floatingActionButton = {
-        FloatingActionButton(onClick = { isShowDialog.value = true }) {
+        FloatingActionButton(onClick = { viewModel.isShowDialog = true }) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "新規作成")
         }
     }) {
