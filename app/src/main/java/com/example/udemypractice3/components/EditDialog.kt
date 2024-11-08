@@ -77,14 +77,17 @@ fun EditDialog(
                     Spacer(modifier = Modifier.height(20.dp))
 
 
-
                     // ボタンの関数
                     Row(
                         modifier = Modifier
                             .padding(horizontal = 10.dp)
                             .fillMaxWidth()
                     ) {
-                        Button(onClick = { isShowDialog.value = false }) {
+                        Button(onClick = {
+                            isShowDialog.value = false
+                            viewModel.title = ""
+                            viewModel.description = ""
+                        }) {
                             Text(text = "キャンセル")
                         }
                         Spacer(modifier = Modifier.width(20.dp))
@@ -92,6 +95,7 @@ fun EditDialog(
                         Button(
                             onClick = {
                                 isShowDialog.value = false
+                                viewModel.createTask()
                             }, modifier = Modifier.width(200.dp)
                         ) {
                             Text(text = "決定")
