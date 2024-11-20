@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.udemypractice3.components.EditDialog
+import com.example.udemypractice3.components.TaskList
 import com.example.udemypractice3.ui.theme.Purple40
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,6 +56,12 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
     }) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues))
         val tasks by viewModel.tasks.collectAsState(initial = emptyList())
+
+        TaskList(
+            tasks = tasks,
+            onClickRow = {},
+            onClickDelete ={},
+        )
     }
 }
 
