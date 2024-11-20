@@ -1,6 +1,7 @@
 package com.example.udemypractice3
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +15,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,7 +32,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = Purple40
             ) {
                 MainContent()
             }
@@ -52,9 +54,10 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
         }
     }) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues))
-
+        val tasks by viewModel.tasks.collectAsState(initial = emptyList())
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
@@ -62,7 +65,6 @@ fun MainPreview() {
 
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Purple40
     ) {
         MainContent()
     }

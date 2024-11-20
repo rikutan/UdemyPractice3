@@ -55,13 +55,15 @@ fun EditDialog(viewModel: MainViewModel = hiltViewModel()) {
 
 
                     // テキストフィールドの関数
-                    CustomTextField(text = "タイトル",
+                    CustomTextField(
+                        text = "タイトル",
                         placeholder = "タイトル",
                         value = viewModel.title,
                         onValueChange = { viewModel.title = it }
                     )
                     Spacer(modifier = Modifier.height(10.dp))
-                    CustomTextField(text = "詳細",
+                    CustomTextField(
+                        text = "詳細",
                         placeholder = "詳細",
                         value = viewModel.description,
                         onValueChange = { viewModel.description = it }
@@ -86,7 +88,7 @@ fun EditDialog(viewModel: MainViewModel = hiltViewModel()) {
 
                         Button(
                             onClick = {
-                                viewModel.isShowDialog  = false
+                                viewModel.isShowDialog = false
                                 viewModel.createTask()
                             }, modifier = Modifier.width(200.dp)
                         ) {
