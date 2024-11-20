@@ -20,6 +20,7 @@ class MainViewModel @Inject constructor(private val taskDao: TaskDao): ViewModel
 
     var isShowDialog by mutableStateOf(false)
 
+    // データベースからタスクを取得
     var tasks = taskDao.loadAllTasks().distinctUntilChanged()
 
     fun createTask() {
