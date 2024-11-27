@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -30,6 +31,13 @@ import com.example.udemypractice3.ui.theme.TextBorderColor
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditDialog(viewModel: MainViewModel = hiltViewModel()) {
+
+    DisposableEffect(Unit) {
+        onDispose {
+            viewModel.resetProperties()
+        }
+    }
+
     BasicAlertDialog(
 
         // ダイアログが閉じられるときの処理を指定
@@ -44,7 +52,7 @@ fun EditDialog(viewModel: MainViewModel = hiltViewModel()) {
                 Column(modifier = Modifier.padding(20.dp)) {
 
                     Text(
-                        text = "タスク新規作成",
+                        text = if (viewModel.isEditing) "タスク更新" else "タスク新規作成",
                         color = TextBorderColor,
                         textAlign = TextAlign.Center,
                         fontSize = 30.sp,
@@ -89,10 +97,15 @@ fun EditDialog(viewModel: MainViewModel = hiltViewModel()) {
                         Button(
                             onClick = {
                                 viewModel.isShowDialog = false
-                                viewModel.createTask()
+                                if (viewModel.isEditing) {
+                                    viewModel.updateTask()
+                                } else {
+                                    viewModel.createTask()
+                                }
+
                             }, modifier = Modifier.width(200.dp)
                         ) {
-                            Text(text = "決定")
+                            Text(text = "OK")
                         }
                     }
 

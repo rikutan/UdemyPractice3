@@ -1,7 +1,6 @@
 package com.example.udemypractice3
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,10 +18,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.udemypractice3.components.EditDialog
 import com.example.udemypractice3.components.TaskList
-import com.example.udemypractice3.ui.theme.Purple40
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,7 +31,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Surface(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().padding(top = 40.dp),
             ) {
                 MainContent()
             }
@@ -59,7 +58,10 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
 
         TaskList(
             tasks = tasks,
-            onClickRow = {  },
+            onClickRow = {
+                viewModel.setEditTask(it)
+                viewModel.isShowDialog = true
+            },
             onClickDelete ={ viewModel.deleteTask(it) },
         )
     }
