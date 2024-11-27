@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 // HiltでViewModelを定義＆テキストフィールドの入力保持ViewModel
 @HiltViewModel
-class MainViewModel @Inject constructor(private val taskDao: TaskDao): ViewModel() {
+class MainViewModel @Inject constructor(private val taskDao: TaskDao) : ViewModel() {
     var title by mutableStateOf("")
     var description by mutableStateOf("")
 
@@ -23,6 +23,7 @@ class MainViewModel @Inject constructor(private val taskDao: TaskDao): ViewModel
     // データベースからタスクを取得
     var tasks = taskDao.loadAllTasks().distinctUntilChanged()
 
+    // タスクを新規追加するメソッド
     fun createTask() {
         viewModelScope.launch {
             val newTask = Task(title = title, description = description)
@@ -30,4 +31,12 @@ class MainViewModel @Inject constructor(private val taskDao: TaskDao): ViewModel
             Log.d(MainViewModel::class.simpleName, "createTask")
         }
     }
+
+    //　タスクを削除するメソッド
+    fun deleteTask(task: Task) {
+        viewModelScope.launch {
+            taskDao.deleteTask(task)
+        }
+    }
+
 }
